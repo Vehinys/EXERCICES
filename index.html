@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/32d7dc4b17.js" crossorigin="anonymous"></script>
+    <title>Todo list</title>
+</head>
+<body>
+
+    <h1>Todo list</h1>
+
+    <div id="Todo">
+        <button id="btn">Add a task</button>
+        <div id="todoCards">
+            <div class="todoCard">
+                <textarea class="task" maxlength="100" cols="20" rows="15">New task</textarea>
+                <span class="delBtn"><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    
+        // CREER UNE FONCTION POUR RAJOUTER UNE TODO LIST
+
+        const addBtn            = document.querySelector('#btn');         //  addBtn           = RENVOIE LE PREMIER ELEMENT DE #btn   
+        const taskCard          = document.querySelector('.todoCard');    //  taskCard         = RENVOIE LE PREMIER ELEMENT DE .todoCard
+        const tasksContainer    = document.querySelector('#todoCards');   //  tasksContainer   = RENVOIE LE PREMIER ELEMENT DE #todoCards
+
+        addBtn.addEventListener('click',addTask);                         // CONFIGURE UNE FONCTION QUI SERA APPELER A CHAQUE FOIS QUE L EVENEMENT SPECIFIE EST REMIS A LA CIBLE
+
+    // CREATION DE FONCTION D AJOUT QUI SE NOMME = addTask
+
+    function addTask() {
+
+        const newTask           = taskCard.cloneNode(true);               // newTask           = RENVOIE UN DOUBLON DE taskCard
+        const newTextArea       = newTask.querySelector('.task');         // newTextArea       = RENVOIE LE PREMIER ELEMENT DE .task SI LA VALEUR EST TRUE ( AU CLICK )
+
+
+              newTextArea.value = "New Task";                             // newTextAre.value  = A AFFICHER LA NOUVELLE VALEUR STRING DANS LA TODO
+              tasksContainer.appendChild(newTask);                        // AJOUTER UNE NOUVELLE TACHE A TaksContainer
+        };
+
+    // AJOUTER LE BOUTON SUPPRESSION 
+    
+        const delBtn            = document.querySelector('.delBtn');      //  delBtn           = RENVOIE LE PREMIER ELEMENT DE #delBtn 
+
+              delBtn.addEventListener('click', function() {               // CONFIGURE UNE FONCTION QUI SERA APPELER A CHAQUE FOIS QUE L EVENEMENT SPECIFIE EST REMIS A LA CIBLE
+              deleteTask(taskCard);
+        });
+
+    // CREATION DE FONCTION DE SUPPRESSION QUI SE NOMME = deleteTash
+    
+    function deleteTask(task){
+
+            task.remove();                                                // SUPPRESSION DE L ACTION CLONAGE
+        }
+
+    // CREATION DE FONCTION DE SUPPRESSION
+
+    function addTask(){
+
+        const newTask           = taskCard.cloneNode(true)                // newTask           = RENVOIE UN DOUBLON DE taskCard
+        const newDelBtn         = newTask.querySelector('.delBtn')        // newDelBtn         = RENVOIE LE PREMIER ELEMENT DE .delBtn
+        const newTextArea       = newTask.querySelector('.task')          // newTextArea       = RENVOIE LE PREMIER ELEMENT DE .task
+
+             newTextArea.value  = "New Task"                              // newTextAre.value  = A AFFICHER LA NOUVELLE VALEUR STRING DANS LA TODO
+             newDelBtn.addEventListener('click', function() {             // CONFIGURE UNE FONCTION QUI SERA APPELER A CHAQUE FOIS QUE L EVENEMENT SPECIFIE EST REMIS A LA CIBLE
+                deleteTask(newTask);                                      
+
+        });
+
+              tasksContainer.appendChild(newTask)                         // AJOUTER UNE NOUVELLE TACHE A TaksContainer
+              updateCount()                                               // MISE A JOUR DU COMPTAGE
+        }
+
+    </script>
+
+</body>
+</html>
